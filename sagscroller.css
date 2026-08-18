@@ -1,0 +1,17 @@
+div#mysagscroller2{width:208px;height:270px;border:0px solid #ED812B;}
+div#mysagscroller2 ul li img{border-width:0;display:block;}
+.sagscroller{width:280px;height:90px;overflow:hidden;position:relative;border:7px solid black;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
+.sagscroller a{font-weight:bold;}
+.sagscroller ul{position:absolute;margin:0;padding:0;background:transparent;list-style:none;width:100%;}
+.sagscroller ul li{display:block;}
+.sagscroller ul li .rsscontent{font-size:90%;}
+.sagscroller ul li .rsslabel{margin-top:5px;background:#eee;font-size:12px;clear:both;}
+
+div#mysagscroller2files{width:208px;height:270px;border:0px solid #ED812B;}
+div#mysagscroller2files ul li img{border-width:0;display:block;}
+.sagscrollerfiles {width:280px;height:90px;overflow:hidden;position:relative;border:7px solid black;border-radius:8px;-moz-border-radius:8px;-webkit-border-radius:8px;}
+.sagscrollerfiles a{font-weight:bold;}
+.sagscrollerfiles ul{position:absolute;margin:0;padding:0;background:transparent;list-style:none;width:100%;}
+.sagscrollerfiles ul li{display:block;}
+.sagscrollerfiles ul li .rsscontent{font-size:90%;}
+.sagscrollerfiles ul li .rsslabel{margin-top:5px;background:#eee;font-size:12px;clear:both;}
