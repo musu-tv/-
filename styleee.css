@@ -1,0 +1,11 @@
+﻿/* weewza.com channels */
+.channel a, 
+
+.channels a {opacity: .5; margin-right:5px;}
+.channels a:hover, .channels a.active { opacity: 10.0; margin-right:5px; }
+
+div#wn	{ 
+    position:relative; 
+    width:550px; height:43px; text-align:center;
+    overflow:hidden;	
+	}
