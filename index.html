@@ -7,7 +7,6 @@
 <meta name="keywords" content="Musu-TV Free online TV Lietuvi&#353;ka televizija Vaikams Animacija Pasakos filmai serialai internete nemokamai онлайн ТВ Tiesiogine transliacija internetu TV per interneta TV3 LNK internete телевидение в интернете безплатно прямой эфир НТВ+ онлайн Discovery Viasat sport" />
 <meta name="author" content="Musu-TV" />
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<link rel="stylesheet" href="style.css">
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
 <meta http-equiv="content-language" content="English" />
@@ -122,7 +121,18 @@ for (i=0;i<=snowmax;i++) {
 <!--скрипт снег-->
 
 
-
+<script>
+function ShowOrHide(id) {
+    var el = document.getElementById(id);
+    if (el) {
+        if (el.style.display == "none" || el.style.display == "") {
+            el.style.display = "block";
+        } else {
+            el.style.display = "none";
+        }
+    }
+}
+</script>
 
 </head>
 
