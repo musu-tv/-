@@ -1,52 +1,80 @@
 /* Sample 8*/
 #box8{
 	position:absolute;
+#box8{
+    position:relative;
+    width:520px;
+    height:200px;
+    overflow:hidden;
+    margin:0 auto;
 }
+
 #box8 div{
-	width:520px;
-	height:200px;
-	float:left;
+    width:520px;
+    height:200px;
+    float:left;
 }
+
 #box8 .buttons{
-	text-align:left
+    text-align:left;
 }
+
 #box8 .next{
-	float:right
+    float:right;
 }
-.sample8 {
-	float: left;
+
+.sample8{
+    float:left;
 }
+
 .sample8 .buttons{
-	text-align:center;
-	clear:both;
+    text-align:center;
+    clear:both;
 }
+
 .sample8 .mask1{
-	border:0px solid #ccc;
+    border:0;
 }
 
 .mask1{
-	position:relative;
-	width:520px;
-	height:200px;
-	overflow:hidden;
-	border:0px solid #666;
+    position:relative;
+    width:520px;
+    height:200px;
+    overflow:hidden;
+    border:0;
 }
 
-.btitle {
-	position: absolute; font-size: 20px; font-weight: bold; color: #fff; font-style: italic; padding: 5px 8px 6px 5px; background: #000; width: 710px; height: 20px; opacity:0.7; filter:alpha(opacity=70);
-	-moz-border-radius: 0px 0px 8px 0px;
-	-webkit-border-radius: 10px;
-	border-right: 1px solid #888;
-	border-bottom: 1px solid #888;
-}
-.btitle  :hover{
-	background: #555;
+.btitle{
+    position:absolute;
+    font-size:20px;
+    font-weight:bold;
+    color:#fff;
+    font-style:italic;
+    padding:5px 8px 6px 5px;
+    background:#000;
+    width:710px;
+    height:20px;
+    opacity:0.7;
+    filter:alpha(opacity=70);
+    border-radius:0 0 8px 0;
+    border-right:1px solid #888;
+    border-bottom:1px solid #888;
 }
 
-.btext {
-	position: absolute; font-size: 11px; font-weight: normal; color: #fff; padding: 2px 2px 2px 4px; background: #000; width: 500px; height: 36px; opacity:0.8; filter:alpha(opacity=80); margin-top: 211px;
+.btext{
+    position:absolute;
+    font-size:11px;
+    font-weight:normal;
+    color:#fff;
+    padding:2px 2px 2px 4px;
+    background:#000;
+    width:500px;
+    height:36px;
+    opacity:0.8;
+    filter:alpha(opacity=80);
+    margin-top:164px;
 }
 
-.bcont :hover{
-	cursor: pointer;
+.bcont:hover{
+    cursor:pointer;
 }
