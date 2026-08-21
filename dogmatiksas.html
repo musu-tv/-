@@ -1,0 +1,406 @@
+﻿<html>
+<head>
+ <title>Dogmatiksas (2021) LT</title>
+<meta name="title" content="Dogmatiksas, Senoji Animacija Pasakos Musu-TV, Lietuvi&#353;ka televizija radio internete nemokamai filmai, serialai, online TV" />
+<meta name="description" content="Dogmatiksas, Senoji Animacija Pasakos Tiesiogine transliacija internetu filmai, serialai, TV per interneta, TV3 LNK internete,  фильмы и сериалы телевидение смотреть онлайн бесплатно, Discovery, Viasat sport" />
+<meta name="keywords" content="Dogmatiksas, Senoji Animacija Pasakos Musu-TV Free online TV, Lietuvi&#353;ka televizija internete nemokamai filmai, serialai, Tiesiogine transliacija internetu, TV per interneta, TV3 LNK internete, фильмы и сериалы телевидение смотреть онлайн бесплатно Discovery, Viasat sport" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+  
+<style>
+    body {
+      background: #FFE4B5;
+      margin: 0;
+      padding: 0;
+    }
+    #player-container {
+      width: 635px;
+      height: 450px;
+      position: relative;
+      background: #000;
+      overflow: hidden;
+    }
+    #video-player, #iframe-player {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none;
+      background: #000;
+    }
+    /* logotipas per vidurį viršuje */
+    #logo {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.7;
+      z-index: 5;
+      height: 30px;
+      width: auto;
+    }
+    /* vertikalus playlistas kairėje */
+    #playlist {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 85%;
+      width: 150px;
+      background: rgba(0,0,0,0.5);
+      padding: 5px;
+      opacity: 0;
+      transition: opacity 0.5s;
+      overflow-y: auto;
+      z-index: 4;
+    }
+ /* fullscreen mygtukas apačioje dešinėje – padidintas */
+    #fullscreenBtn {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 6px;
+      padding: 6px 12px;  /* buvo 4px 8px */
+      cursor: pointer;
+      font-size: 18px;    /* buvo 14px */
+      z-index: 6;
+    }
+    #fullscreenBtn:hover { background: rgba(80,80,80,0.8); }
+    /* playlistas */
+    #playlist {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 85%;
+      width: 150px;
+      background: rgba(0,0,0,0.5);
+      padding: 5px;
+      opacity: 0;
+      transition: opacity 0.5s;
+      overflow-y: auto;
+      z-index: 4;
+    }
+    #playlist div {
+      cursor: pointer;
+      padding: 6px;
+      margin-bottom: 4px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.1);
+      font-size: 13px;
+      color: #fff;
+      height: 40px;
+      line-height: 1.2em;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    #playlist div:hover {
+      background: rgba(255,255,255,0.2);
+    }
+    /* pradinio paveikslėlio stilius */
+    #preloader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1; /* žemiau playlisto ir video */
+  pointer-events: none; /* leidžia spustelėti video ir playlistą */
+}
+  </style>
+
+
+<style type="text/css">
+
+		.tooltip {
+
+			border-bottom: 1px dotted #000000; color: #000000; outline: none;
+
+			cursor: help; text-decoration: none;
+
+			position: relative;
+
+		}
+
+		.tooltip span {
+
+			margin-left: 999em;
+
+			position: absolute;
+
+		}
+
+		.tooltip:hover span {
+
+			border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
+
+			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
+
+			font-family: Calibri, Tahoma, Geneva, sans-serif;
+
+			position: absolute; left: 1em; top: 2em; z-index: 99;
+
+			margin-left: -10; width: 350px;
+
+                        margin-top: -500; width: 350px;
+
+		}
+
+		.tooltip:hover img {
+
+			border: 0; margin: -10px 0 0 -55px;
+
+			float: left; position: absolute;
+
+		}
+
+		.tooltip:hover em {
+
+			font-family: Candara, Tahoma, Geneva, sans-serif; font-size: 1.2em; font-weight: bold;
+
+			display: block; padding: 0.2em 0 0.6em 0;
+
+		}
+
+		.classic { padding: 0.8em 1em; }
+
+		.custom { padding: 0.5em 0.8em 0.8em 2em; }
+
+		* html a:hover { background: transparent; }
+
+		.classic {background: #FFFFAA; border: 1px solid #FFAD33; }
+
+		.critical { background: #FFCCAA; border: 1px solid #FF3334;	}
+
+		.help { background: #9FDAEE; border: 1px solid #2BB0D7;	}
+
+		.info { background: #9FDAEE; border: 1px solid #2BB0D7;	}
+
+		.warning { background: #FFFFAA; border: 1px solid #FFAD33; }
+
+		</style>
+
+
+</head>
+<body oncopy="return false" oncontextmenu="return false">
+
+
+<div id="player-container">
+  <img id="logo" src="https://internetine-tv.narod.ru/musu-tv.png" alt="Logo">
+
+<!--######## PAVEIKSLELIS ######## -->
+  <img id="preloader" src="https://content.foto.my.mail.ru/mail/d_ball/16/h-1395.jpg" alt="Pradinis paveikslėlis">
+<!--######## PAVEIKSLELIS ######## -->
+
+  <video id="video-player" controls></video>
+  <iframe id="iframe-player" allowfullscreen></iframe>
+
+  <div id="playlist"></div>
+  <!-- fullscreen mygtukas -->
+  <button id="fullscreenBtn">⛶</button>
+</div>
+
+<script>
+  const videos = [
+    { title: "___  1  SEZONAS ___", type: "=", src: "=" },
+    { title: "1-2 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6129655" },
+    { title: "3-4 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6129703" },
+    { title: "5-6 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6129832" },
+    { title: "7-8 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6129848" },
+    { title: "9-10 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6129868" },
+    { title: "11-12 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6130167" },
+    { title: "13-14 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6130173" },
+    { title: "15-16 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6130209" },
+    { title: "17-18 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6131942" },
+    { title: "19-20 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6132856" },
+    { title: "21-22 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6133929" },
+    { title: "23-24 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6133963" },
+    { title: "25-26 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6134942" },
+    { title: "27-28 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6137744" },
+    { title: "29-30 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6138224" },
+    { title: "31-32 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6138900" },
+    { title: "33-34 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6139536" },
+    { title: "35-36 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6140317" },
+    { title: "37-38 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6142350" },
+    { title: "39-40 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6143623" },
+    { title: "41-42 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6144807" },
+    { title: "43-44 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6144838" },
+    { title: "45-46 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6145842" },
+    { title: "47-48 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6148963" },
+    { title: "49-50 serija", type: "iframe", src: "https://video.sibnet.ru/shell.php?videoid=6149008" }
+  ];
+
+  const videoEl = document.getElementById("video-player");
+  const iframeEl = document.getElementById("iframe-player");
+  const playlistEl = document.getElementById("playlist");
+  const playerContainer = document.getElementById("player-container");
+  const fullscreenBtn = document.getElementById("fullscreenBtn");
+  const preloaderEl = document.getElementById("preloader");
+
+  let currentIndex = 0;
+
+  function loadVideo(index) {
+    currentIndex = index;
+    const item = videos[index];
+
+    // slepiam pradinį paveikslėlį
+    preloaderEl.style.display = "none";
+
+    videoEl.style.display = "none";
+    iframeEl.style.display = "none";
+
+    if (item.type === "mp4") {
+      iframeEl.src = "";
+      videoEl.src = item.src;
+      videoEl.style.display = "block";
+      videoEl.play();
+    } else if (item.type === "iframe") {
+      videoEl.pause();
+      videoEl.src = "";
+      iframeEl.src = item.src;
+      iframeEl.style.display = "block";
+    }
+  }
+
+  // sugeneruojam playlistą
+  videos.forEach((v, i) => {
+    const div = document.createElement("div");
+    div.textContent = v.title;
+    div.onclick = () => {
+      loadVideo(i);
+      showPlaylist();
+    };
+    playlistEl.appendChild(div);
+  });
+
+  // paleidžiam pirmą
+  // paliekam preloader kol paspaudžiama playlist elementas
+  // jei nori automatiškai paleisti pirmą, gali įjungti loadVideo(0) iškart
+  // loadVideo(0);
+
+  // auto-sekantis tik mp4 atveju
+  videoEl.addEventListener("ended", () => {
+    if (currentIndex < videos.length - 1) {
+      loadVideo(currentIndex + 1);
+    }
+  });
+
+  // playlisto rodymo/slepimo logika
+  let hideTimeout;
+  function showPlaylist() {
+    playlistEl.style.opacity = "1";
+    clearTimeout(hideTimeout);
+    hideTimeout = setTimeout(() => {
+      playlistEl.style.opacity = "0";
+    }, 6000);
+  }
+  playerContainer.addEventListener("mousemove", showPlaylist);
+  showPlaylist();
+  // fullscreen
+  fullscreenBtn.addEventListener("click", () => {
+    if (!document.fullscreenElement) playerContainer.requestFullscreen();
+    else document.exitFullscreen();
+  });
+
+</script>
+
+
+<p>
+
+<!-#################-->
+
+&nbsp; &nbsp; <strong><a class="tooltip" href="#"><font color="blue">INFO</font> <span class="custom info"><img src="https://content.foto.my.mail.ru/mail/d_ball/16/h-1394.jpg" width="630" alt="Apra?ymas:" /></span></a>
+
+<!-#################-->
+
+
+<strong>  &nbsp  &nbsp;  <font color="blue"></font><font color="green">Dogmatiksas (2021)</font> &nbsp  &nbsp; 
+
+<p>
+<!-#################-->
+<div class="share-icons">
+  <!-- Facebook -->
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https://tavo-svetaine.lt" 
+     target="_blank" rel="noopener noreferrer">
+    <img src="https://img.icons8.com/color/48/facebook.png" alt="Share on Facebook" width="25" height="25">
+  </a>
+
+  <!-- Telegram -->
+  <a href="https://t.me/share/url?url=https://tavo-svetaine.lt&text=Pažiūrėk šitą!" 
+     target="_blank" rel="noopener noreferrer">
+    <img src="https://img.icons8.com/color/48/telegram-app.png" alt="Share on Telegram" width="25" height="25">
+  </a>
+
+  <!-- Twitter (X) -->
+  <a href="https://twitter.com/intent/tweet?url=https://tavo-svetaine.lt&text=Pažiūrėk šitą!" 
+     target="_blank" rel="noopener noreferrer">
+    <img src="https://img.icons8.com/color/48/twitter.png" alt="Share on Twitter" width="25" height="25">
+  </a>
+
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/tavo_profilis/" 
+     target="_blank" rel="noopener noreferrer">
+    <img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Visit Instagram" width="25" height="25">
+  </a>
+
+  <!-- TikTok -->
+  <a href="https://www.tiktok.com/@tavo_profilis" 
+     target="_blank" rel="noopener noreferrer">
+    <img src="https://img.icons8.com/fluency/48/tiktok.png" alt="Visit TikTok" width="25" height="25">
+  </a>
+</div>
+
+<style>
+.share-icons {
+  display: flex;
+  gap: 10px;             /* tarpai tarp ikonų */
+  align-items: center;
+  margin-left: 40px;     /* poslinkis nuo kairio krašto */
+}
+
+.share-icons a {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.share-icons a:hover {
+  transform: scale(1.3); /* padidėjimas užvedus pelę */
+}
+</style>
+<!-#################-->
+
+
+<center>
+
+<hr size=3 color=#FFE4B5>
+
+<p>
+
+<hr size=3 color=#FFE4B5>
+
+<p>
+
+<hr size=3 color=#FFE4B5>
+
+<p>
+
+<hr size=3 color=#FFE4B5>
+
+<p>
+
+<hr size=3 color=#FFE4B5>
+
+<p>
+
+<hr size=3 color=#FFE4B5>
+
+<p>
+
+<A HREF="http://www.internetine-tv.narod.ru" Target="_self"><img src=http://www.internetine-tv.narod.ru/home.png title="i pradini"></A> <p><strong> &nbsp &nbsp Dogmatiksas (2021) lt ziureti online  internetu internete nemokamai Senoji Animacija Pasakos filmai serialai  фильмы и сериалы телевидение смотреть онлайн бесплатно
+
+
+</body>
+</html>
